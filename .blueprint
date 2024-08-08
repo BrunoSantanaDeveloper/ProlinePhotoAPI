@@ -1,0 +1,10 @@
+created:
+    - database/factories/CategoriaFactory.php
+    - database/factories/SubcategoriaFactory.php
+    - database/migrations/2024_08_04_050749_create_categorias_table.php
+    - database/migrations/2024_08_04_050750_create_subcategorias_table.php
+    - app/Models/Categoria.php
+    - app/Models/Subcategoria.php
+models:
+    Categoria: { nome: string, descricao: text, relationships: { hasMany: Subcategoria } }
+    Subcategoria: { nome: string, descricao: text, categoria_id: id, relationships: { belongsTo: Categoria } }

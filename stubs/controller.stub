@@ -1,0 +1,42 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ request }};
+use {{ service }};
+
+
+class {{ class }} extends Controller
+{
+    protected $service;
+
+    public function __construct({{ serviceClass }} $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        return response()->json($this->service->getAll());
+    }
+
+    public function show($id)
+    {
+        return response()->json($this->service->find($id));
+    }
+
+    public function store(Request $request)
+    {
+        return response()->json($this->service->create($request->all()));
+    }
+
+    public function update(Request $request, $id)
+    {
+        return response()->json($this->service->update($id, $request->all()));
+    }
+
+    public function destroy($id)
+    {
+        return response()->json($this->service->delete($id));
+    }
+}

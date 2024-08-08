@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: "API de Categorias"
+  version: "1.0.0"
+  description: "API para gerenciamento de categorias."
+
+servers:
+  - url: "http://localhost:8000/api"
+    description: "Servidor local"
+
+paths:
+  /categorias:
+    get:
+      summary: "Listar todas as categorias"
+      tags:
+        - "Categorias"
+      responses:
+        "200":
+          description: "Lista de categorias"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items: $ref:"#/components/schemas/Categoria"
+
+    post:
+      summary: "Criar uma nova categoria"
+      tags:
+        - "Categorias"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoriaRequest"
+      responses:
+        "201":
+          description: "Categoria criada com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "400":
+          description: "Erro na validação dos dados"
+
+  /categorias/{id}:
+    get:
+      summary: "Obter uma categoria específica"
+      tags:
+        - "Categorias"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+          description: "ID da categoria"
+      responses:
+        "200":
+          description: "Detalhes da categoria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "404":
+          description: "Categoria não encontrada"
+
+    put:
+      summary: "Atualizar uma categoria existente"
+      tags:
+        - "Categorias"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+          description: "ID da categoria"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoriaRequest"
+      responses:
+        "200":
+          description: "Categoria atualizada com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "404":
+          description: "Categoria não encontrada"
+        "400":
+          description: "Erro na validação dos dados"
+
+    delete:
+      summary: "Excluir uma categoria"
+      tags:
+        - "Categorias"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+          description: "ID da categoria"
+      responses:
+        "200":
+          description: "Categoria excluída com sucesso"
+        "404":
+          description: "Categoria não encontrada"
+
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nome:
+          type: string
+          example: "Categoria de Exemplo"
+        descricao:
+          type: string
+          example: "Descrição da Categoria de Exemplo"
+
+    CategoriaRequest:
+      type: object
+      required:
+        - nome
+        - descricao
+      properties:
+        nome:
+          type: string
+          example: "Nova Categoria"
+        descricao:
+          type: string
+          example: "Descrição da Nova Categoria"

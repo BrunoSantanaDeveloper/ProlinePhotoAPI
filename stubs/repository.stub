@@ -1,0 +1,43 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ modelNameSpace }};
+use {{ interface }};
+
+class {{ class }} implements {{ interfaceClass }}
+{
+    public function getAll()
+    {
+        return {{ model }}::all();
+    }
+
+    public function find($id)
+    {
+        return {{ model }}::find($id);
+    }
+
+    public function create(array $data)
+    {
+        return {{ model }}::create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        $model = $this->find($id);
+        if ($model) {
+            $model->update($data);
+            return $model;
+        }
+        return null;
+    }
+
+    public function delete($id)
+    {
+        $model = $this->find($id);
+        if ($model) {
+            return $model->delete();
+        }
+        return false;
+    }
+}

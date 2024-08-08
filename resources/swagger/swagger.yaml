@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: "Photo App API"
+  version: "1.0.0"
+  description: "API for managing photos and their geolocation data"
+
+servers:
+  - url: "http://localhost:8000/api"
+    description: "Local server"
+
+paths:
+  /photos:
+    get:
+      summary: "List all photos"
+      tags:
+        - "Photos"
+      responses:
+        "200":
+          description: "A list of photos"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Photo"
+
+    post:
+      summary: "Upload a new photo"
+      tags:
+        - "Photos"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PhotoRequest"
+      responses:
+        "201":
+          description: "Photo successfully uploaded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+        "400":
+          description: "Validation error"
+
+  /photos/{id}:
+    get:
+      summary: "Get details of a specific photo"
+      tags:
+        - "Photos"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+          description: "ID of the photo"
+      responses:
+        "200":
+          description: "Details of the photo"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+        "404":
+          description: "Photo not found"
+
+    delete:
+      summary: "Delete a specific photo"
+      tags:
+        - "Photos"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+          description: "ID of the photo"
+      responses:
+        "200":
+          description: "Photo successfully deleted"
+        "404":
+          description: "Photo not found"
+
+components:
+  schemas:
+    Photo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        photo_path:
+          type: string
+          example: "photos/example.jpg"
+        latitude:
+          type: number
+          format: double
+          example: 37.7749
+        longitude:
+          type: number
+          format: double
+          example: -122.4194
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    PhotoRequest:
+      type: object
+      required:
+        - photo
+        - latitude
+        - longitude
+      properties:
+        photo:
+          type: string
+          format: binary
+          description: "The photo file to upload"
+        latitude:
+          type: number
+          format: double
+          description: "Latitude of the photo's location"
+        longitude:
+          type: number
+          format: double
+          description: "Longitude of the photo's location"

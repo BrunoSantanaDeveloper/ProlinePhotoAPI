@@ -1,0 +1,25 @@
+models:
+  Categoria:
+    nome: string
+    descricao: text
+    relationships:
+      hasMany: Subcategoria
+
+  Subcategoria:
+    nome: string
+    descricao: text
+    categoria_id: id
+    relationships:
+      belongsTo: Categoria
+
+factories:
+  Categoria:
+    nome: faker.word
+    descricao: faker.text
+    has:
+      Subcategoria: 5
+
+  Subcategoria:
+    nome: faker.word
+    descricao: faker.text
+    categoria_id: factory:Categoria

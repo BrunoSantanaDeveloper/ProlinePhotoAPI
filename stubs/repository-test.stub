@@ -1,0 +1,21 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use {{ serviceNamespace }};
+use {{ repositoryNamespace }};
+
+class {{ class }}Test extends TestCase
+{
+    protected $service;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $repository = $this->createMock({{ repositoryClass }}::class);
+        $this->service = new {{ serviceClass }}($repository);
+    }
+
+    // Adicione seus testes aqui
+}

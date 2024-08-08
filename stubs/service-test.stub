@@ -1,0 +1,19 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use {{ repositoryNamespace }};
+
+class {{ class }}Test extends TestCase
+{
+    protected $repository;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = new {{ repositoryClass }}();
+    }
+
+    // Adicione seus testes aqui
+}
