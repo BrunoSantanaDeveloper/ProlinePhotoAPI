@@ -65,6 +65,12 @@ Este projeto é uma api de gerenciamento de fotos e coordenadas do usuário, con
     ```bash
     php artisan key:generate
     ```
+
+7. **Inicie o server:**
+    ```bash
+    php artisan serve
+    ```
+
 ## **Uso do Docker**
 
 ### **Construir e Rodar o Container**
