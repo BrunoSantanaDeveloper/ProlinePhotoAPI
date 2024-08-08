@@ -1,8 +1,5 @@
-Aqui está o README atualizado, incluindo os comandos personalizados que você criou:
 
----
-
-# **TESTE COR**
+# **TESTE PROLINE**
 
 ## **Introdução**
 
@@ -59,12 +56,12 @@ Este projeto é uma api de gerenciamento de fotos e coordenadas do usuário, con
     php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
     ```
 
-4. **Execute as migrações:**
+6. **Execute as migrações:**
     ```bash
     php artisan migrate
     ```
 
-    6. **Gere a Key:**
+7. **Gere a Key:**
     ```bash
     php artisan key:generate
     ```
